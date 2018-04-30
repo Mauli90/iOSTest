@@ -59,16 +59,18 @@
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSError *error;
         NSString *string = [NSString stringWithContentsOfURL: [NSURL URLWithString: @"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"] encoding:NSISOLatin1StringEncoding error:&error];
-        NSData * responseData = [string dataUsingEncoding:NSUTF8StringEncoding];
-        jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            [self.refreshControl endRefreshing];
-            array = [jsonObject objectForKey:@"rows"];
-            self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
-            [_tableView reloadData];
-        });
+        if(string != nil){
+            NSData * responseData = [string dataUsingEncoding:NSUTF8StringEncoding];
+            jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self.refreshControl endRefreshing];
+                array = [jsonObject objectForKey:@"rows"];
+                self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
+                [_tableView reloadData];
+            });
+        }else{
+            NSLog(@"%@", error.description);
+        }
     });
     
     
