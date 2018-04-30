@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CustomTableViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ViewController ()
 
@@ -82,10 +83,7 @@
 {
     return 30;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//   return 300;
-//}
+
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
@@ -94,7 +92,32 @@
 {
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    return cell;
+    NSDictionary * dict = [array objectAtIndex:indexPath.row];
+    cell.imgView.image = [UIImage imageNamed:@"placeholder.png"];
+    
+    if(![[dict objectForKey:@"imageHref"] isKindOfClass:[NSNull class]])
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"imageHref"]]
+                    placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    if(![[dict objectForKey:@"title"] isKindOfClass:[NSNull class]]){
+        [cell.titleLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]]];
+    } else {
+        cell.titleLabel.text = @"";
+    }
+    
+    if(![[dict objectForKey:@"description"] isKindOfClass:[NSNull class]])
+    {
+        [cell.descLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"description"]]];
+    }
+    else {
+        cell.descLabel.text = @"";
+    }
+    
+    cell.descLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.descLabel.numberOfLines=0;
+    [cell.descLabel sizeToFit];
+
+     return cell;
 }
 
 - (void)didReceiveMemoryWarning {
