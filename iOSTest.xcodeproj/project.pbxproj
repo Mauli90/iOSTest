@@ -18,6 +18,7 @@
 		F4787F9020978B9D00F60FB4 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4787F8E20978B9D00F60FB4 /* Masonry.framework */; };
 		F4787F9120978B9E00F60FB4 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4787F8F20978B9D00F60FB4 /* SDWebImage.framework */; };
 		F4787F93209796C100F60FB4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F4787F92209796C100F60FB4 /* placeholder.png */; };
+		F4787F972097B32200F60FB4 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4787F962097B32200F60FB4 /* CustomTableViewCell.xib */; };
 		FC7312225E03C58A5888CE50 /* Pods_iOSTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDE718A3CFE84DC7F530CB0 /* Pods_iOSTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		F4787F8E20978B9D00F60FB4 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = "Pods/../build/Release-iphoneos/Masonry/Masonry.framework"; sourceTree = "<group>"; };
 		F4787F8F20978B9D00F60FB4 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Release-iphoneos/SDWebImage/SDWebImage.framework"; sourceTree = "<group>"; };
 		F4787F92209796C100F60FB4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		F4787F962097B32200F60FB4 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				F441A0F120977C6200DEB97D /* ViewController.m */,
 				F441A10120977F1B00DEB97D /* CustomTableViewCell.h */,
 				F441A10220977F1B00DEB97D /* CustomTableViewCell.m */,
+				F4787F962097B32200F60FB4 /* CustomTableViewCell.xib */,
 				F441A0F320977C6200DEB97D /* Main.storyboard */,
 				F441A0F620977C6200DEB97D /* Assets.xcassets */,
 				F441A0F820977C6200DEB97D /* LaunchScreen.storyboard */,
@@ -184,6 +187,7 @@
 			files = (
 				F441A0FA20977C6200DEB97D /* LaunchScreen.storyboard in Resources */,
 				F441A0F720977C6200DEB97D /* Assets.xcassets in Resources */,
+				F4787F972097B32200F60FB4 /* CustomTableViewCell.xib in Resources */,
 				F441A10520977FAC00DEB97D /* Podfile in Resources */,
 				F4787F93209796C100F60FB4 /* placeholder.png in Resources */,
 				F441A0F520977C6200DEB97D /* Main.storyboard in Resources */,

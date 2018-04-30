@@ -35,6 +35,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [_tableView reloadData];
     [self.view addSubview:_tableView];
