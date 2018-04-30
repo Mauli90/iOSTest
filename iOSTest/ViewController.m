@@ -23,13 +23,14 @@
     [self getData];
     // Do any additional setup after loading the view, typically from a nib.
 }
+
 // Programatically UI plot
 - (void)plotUI{
     int width = [[UIScreen mainScreen] bounds].size.width;
     int height = [[UIScreen mainScreen] bounds].size.height;
     
     _tableView = [[UITableView alloc]init];
-    _tableView.frame = CGRectMake(0,20,width,height);
+    _tableView.frame = CGRectMake(0,0,width,height);
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
@@ -60,6 +61,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [self.refreshControl endRefreshing];
             array = [jsonObject objectForKey:@"rows"];
+            self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
             [_tableView reloadData];
         });
     });
@@ -75,14 +77,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 30;
-}
+
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -93,25 +88,23 @@
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     NSDictionary * dict = [array objectAtIndex:indexPath.row];
-    cell.imgView.image = [UIImage imageNamed:@"placeholder.png"];
     
+    cell.imgView.image = [UIImage imageNamed:@"placeholder.png"];
     if(![[dict objectForKey:@"imageHref"] isKindOfClass:[NSNull class]])
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"imageHref"]]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
+    cell.titleLabel.text = @"";
     if(![[dict objectForKey:@"title"] isKindOfClass:[NSNull class]]){
         [cell.titleLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]]];
-    } else {
-        cell.titleLabel.text = @"";
     }
     
+    cell.descLabel.text = @"";
     if(![[dict objectForKey:@"description"] isKindOfClass:[NSNull class]])
     {
-        [cell.descLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"description"]]];
+     [cell.descLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"description"]]];
     }
-    else {
-        cell.descLabel.text = @"";
-    }
+   
     
     cell.descLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.descLabel.numberOfLines=0;
