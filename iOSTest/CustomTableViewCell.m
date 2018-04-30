@@ -21,6 +21,9 @@
     
     // Configure the view for the selected state
 }
+
+// Programmatically Autolayout
+
 //- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 //    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 //    if (self) {
