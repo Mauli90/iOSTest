@@ -40,7 +40,7 @@
         
         _descLabel = [[UILabel alloc] init];
         [_descLabel setTextColor:[UIColor blackColor]];
-        [_descLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0f]];
+        [_descLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:16.0f]];
         [_descLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addSubview:_descLabel];
         
@@ -49,7 +49,7 @@
         [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@(100));
             make.height.equalTo(@(100));
-           make.top.equalTo(self.contentView.mas_top).with.offset(padding.top);
+            make.top.equalTo(self.contentView.mas_top).with.offset(padding.top);
             make.left.equalTo(self.contentView.mas_left).with.offset(padding.left);
             make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-padding.bottom).priorityMedium();
         }];
@@ -57,8 +57,8 @@
         UIEdgeInsets padding1 = UIEdgeInsetsMake(5, 10, 10, 10);
         
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.top.equalTo(self.contentView.mas_top).with.offset(padding1.top);
-          make.left.equalTo(_imgView.mas_right).with.offset(padding1.left);
+            make.top.equalTo(self.contentView.mas_top).with.offset(padding1.top);
+            make.left.equalTo(_imgView.mas_right).with.offset(padding1.left);
             make.right.equalTo(self.contentView.mas_right).with.offset(-padding1.right);
         }];
         
@@ -71,7 +71,7 @@
             
             make.right.equalTo(self.contentView.mas_right).with.offset(-padding2.right);
         }];
-       
+        
         
     }
     return self;

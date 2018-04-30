@@ -13,9 +13,18 @@
 		F441A0F520977C6200DEB97D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F441A0F320977C6200DEB97D /* Main.storyboard */; };
 		F441A0F720977C6200DEB97D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F441A0F620977C6200DEB97D /* Assets.xcassets */; };
 		F441A0FA20977C6200DEB97D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F441A0F820977C6200DEB97D /* LaunchScreen.storyboard */; };
+		F441A10320977F1B00DEB97D /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F441A10220977F1B00DEB97D /* CustomTableViewCell.m */; };
+		F441A10520977FAC00DEB97D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F441A10420977FAC00DEB97D /* Podfile */; };
+		F4787F9020978B9D00F60FB4 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4787F8E20978B9D00F60FB4 /* Masonry.framework */; };
+		F4787F9120978B9E00F60FB4 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4787F8F20978B9D00F60FB4 /* SDWebImage.framework */; };
+		F4787F93209796C100F60FB4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F4787F92209796C100F60FB4 /* placeholder.png */; };
+		FC7312225E03C58A5888CE50 /* Pods_iOSTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDE718A3CFE84DC7F530CB0 /* Pods_iOSTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D9196F20850EB248BB6EA87C /* Pods-iOSTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSTest/Pods-iOSTest.debug.xcconfig"; sourceTree = "<group>"; };
+		DBDE718A3CFE84DC7F530CB0 /* Pods_iOSTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAF4C7A732598A3796E90379 /* Pods-iOSTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSTest/Pods-iOSTest.release.xcconfig"; sourceTree = "<group>"; };
 		F441A0E720977C6200DEB97D /* iOSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F441A0EB20977C6200DEB97D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F441A0ED20977C6200DEB97D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +35,12 @@
 		F441A0F620977C6200DEB97D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F441A0F920977C6200DEB97D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F441A0FB20977C6200DEB97D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F441A10120977F1B00DEB97D /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		F441A10220977F1B00DEB97D /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		F441A10420977FAC00DEB97D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		F4787F8E20978B9D00F60FB4 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = "Pods/../build/Release-iphoneos/Masonry/Masonry.framework"; sourceTree = "<group>"; };
+		F4787F8F20978B9D00F60FB4 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Release-iphoneos/SDWebImage/SDWebImage.framework"; sourceTree = "<group>"; };
+		F4787F92209796C100F60FB4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +48,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4787F9020978B9D00F60FB4 /* Masonry.framework in Frameworks */,
+				F4787F9120978B9E00F60FB4 /* SDWebImage.framework in Frameworks */,
+				FC7312225E03C58A5888CE50 /* Pods_iOSTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA0F3205225EB763C3A071EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4787F8E20978B9D00F60FB4 /* Masonry.framework */,
+				F4787F8F20978B9D00F60FB4 /* SDWebImage.framework */,
+				DBDE718A3CFE84DC7F530CB0 /* Pods_iOSTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F441A0DE20977C6200DEB97D = {
 			isa = PBXGroup;
 			children = (
+				F441A10420977FAC00DEB97D /* Podfile */,
 				F441A0E920977C6200DEB97D /* iOSTest */,
 				F441A0E820977C6200DEB97D /* Products */,
+				F532FBF33B3301D1FCB1AE24 /* Pods */,
+				BA0F3205225EB763C3A071EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +89,13 @@
 		F441A0E920977C6200DEB97D /* iOSTest */ = {
 			isa = PBXGroup;
 			children = (
+				F4787F92209796C100F60FB4 /* placeholder.png */,
 				F441A0ED20977C6200DEB97D /* AppDelegate.h */,
 				F441A0EE20977C6200DEB97D /* AppDelegate.m */,
 				F441A0F020977C6200DEB97D /* ViewController.h */,
 				F441A0F120977C6200DEB97D /* ViewController.m */,
+				F441A10120977F1B00DEB97D /* CustomTableViewCell.h */,
+				F441A10220977F1B00DEB97D /* CustomTableViewCell.m */,
 				F441A0F320977C6200DEB97D /* Main.storyboard */,
 				F441A0F620977C6200DEB97D /* Assets.xcassets */,
 				F441A0F820977C6200DEB97D /* LaunchScreen.storyboard */,
@@ -79,6 +113,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F532FBF33B3301D1FCB1AE24 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D9196F20850EB248BB6EA87C /* Pods-iOSTest.debug.xcconfig */,
+				EAF4C7A732598A3796E90379 /* Pods-iOSTest.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +129,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F441A0FE20977C6200DEB97D /* Build configuration list for PBXNativeTarget "iOSTest" */;
 			buildPhases = (
+				794FF313D3DD68E535E865D9 /* [CP] Check Pods Manifest.lock */,
 				F441A0E320977C6200DEB97D /* Sources */,
 				F441A0E420977C6200DEB97D /* Frameworks */,
 				F441A0E520977C6200DEB97D /* Resources */,
+				6A23F05A32501C7D77F3CF6E /* [CP] Embed Pods Frameworks */,
+				0CB024E64BBBC71CC7630682 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -138,11 +184,61 @@
 			files = (
 				F441A0FA20977C6200DEB97D /* LaunchScreen.storyboard in Resources */,
 				F441A0F720977C6200DEB97D /* Assets.xcassets in Resources */,
+				F441A10520977FAC00DEB97D /* Podfile in Resources */,
+				F4787F93209796C100F60FB4 /* placeholder.png in Resources */,
 				F441A0F520977C6200DEB97D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CB024E64BBBC71CC7630682 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSTest/Pods-iOSTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A23F05A32501C7D77F3CF6E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSTest/Pods-iOSTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		794FF313D3DD68E535E865D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F441A0E320977C6200DEB97D /* Sources */ = {
@@ -151,6 +247,7 @@
 			files = (
 				F441A0F220977C6200DEB97D /* ViewController.m in Sources */,
 				F441A0EF20977C6200DEB97D /* AppDelegate.m in Sources */,
+				F441A10320977F1B00DEB97D /* CustomTableViewCell.m in Sources */,
 				F441A0EC20977C6200DEB97D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,7 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -260,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -269,23 +366,39 @@
 		};
 		F441A0FF20977C6200DEB97D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9196F20850EB248BB6EA87C /* Pods-iOSTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos/Masonry",
+					"$(PROJECT_DIR)/build/Release-iphoneos/SDWebImage",
+				);
 				INFOPLIST_FILE = iOSTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iOSTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		F441A10020977C6200DEB97D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAF4C7A732598A3796E90379 /* Pods-iOSTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos/Masonry",
+					"$(PROJECT_DIR)/build/Release-iphoneos/SDWebImage",
+				);
 				INFOPLIST_FILE = iOSTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iOSTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -308,6 +421,7 @@
 				F441A10020977C6200DEB97D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

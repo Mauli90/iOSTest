@@ -29,6 +29,7 @@
     int width = [[UIScreen mainScreen] bounds].size.width;
     int height = [[UIScreen mainScreen] bounds].size.height;
     
+    // Table view implimentation
     _tableView = [[UITableView alloc]init];
     _tableView.frame = CGRectMake(0,0,width,height);
     _tableView.dataSource = self;
@@ -37,6 +38,9 @@
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [_tableView reloadData];
     [self.view addSubview:_tableView];
+    
+    
+    // Pull to refresh
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor purpleColor];
@@ -77,8 +81,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-
-
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
@@ -100,17 +102,16 @@
     }
     
     cell.descLabel.text = @"";
-    if(![[dict objectForKey:@"description"] isKindOfClass:[NSNull class]])
-    {
-     [cell.descLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"description"]]];
+    if(![[dict objectForKey:@"description"] isKindOfClass:[NSNull class]]){
+        [cell.descLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"description"]]];
     }
-   
+    
     
     cell.descLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.descLabel.numberOfLines=0;
     [cell.descLabel sizeToFit];
-
-     return cell;
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {
