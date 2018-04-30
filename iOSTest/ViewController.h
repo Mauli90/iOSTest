@@ -12,7 +12,9 @@
 {
     UITableView * _tableView;
     NSArray * array;
+    NSDictionary * jsonObject;
 }
+@property (nonatomic, strong) UIRefreshControl *  refreshControl;
 
 
 @end

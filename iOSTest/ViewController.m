@@ -19,7 +19,7 @@
     [super viewDidLoad];
     array = [[NSArray alloc] init];
     [self plotUI];
-
+    [self getData];
     // Do any additional setup after loading the view, typically from a nib.
 }
 // Programatically UI plot
@@ -35,10 +35,36 @@
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [_tableView reloadData];
     [self.view addSubview:_tableView];
-   
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(getData)
+                  forControlEvents:UIControlEventValueChanged];
+    [_tableView addSubview:_refreshControl];
+    _tableView.rowHeight=UITableViewAutomaticDimension;
+    
 }
 
-
+// Get data from server
+- (void)getData {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSError *error;
+        NSString *string = [NSString stringWithContentsOfURL: [NSURL URLWithString: @"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"] encoding:NSISOLatin1StringEncoding error:&error];
+        NSData * responseData = [string dataUsingEncoding:NSUTF8StringEncoding];
+        jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            [self.refreshControl endRefreshing];
+            array = [jsonObject objectForKey:@"rows"];
+            [_tableView reloadData];
+        });
+    });
+    
+    
+}
 
 // Table view Delegate & Datasource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -48,12 +74,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 30;
 }
-
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//   return 300;
+//}
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
