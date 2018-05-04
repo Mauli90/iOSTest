@@ -9,8 +9,9 @@
 #import "ViewController.h"
 #import "CustomTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "NetworkUtility.h"
 @interface ViewController ()
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
@@ -19,11 +20,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     array = [[NSArray alloc] init];
+    
     [self plotUI];
-    [self getData];
+    
+    // Activity Indicator
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake (UIScreen.mainScreen.bounds.size.width/2 - 40, UIScreen.mainScreen.bounds.size.height/2 - 40, 80, 80)];
+    self.activityIndicatorView.color = [UIColor blackColor];
+    [self.view addSubview:self.activityIndicatorView];
+    
+    [self getDataFromServer];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+-(void)startLoader{
+    [self.activityIndicatorView startAnimating];
+}
+-(void)stopLoader{
+    [self.activityIndicatorView stopAnimating];
+}
 // Programatically UI plot
 - (void)plotUI{
     int width = [[UIScreen mainScreen] bounds].size.width;
@@ -47,7 +61,7 @@
     self.refreshControl.backgroundColor = [UIColor purpleColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:self
-                            action:@selector(getData)
+                            action:@selector(getDataFromServer)
                   forControlEvents:UIControlEventValueChanged];
     [_tableView addSubview:_refreshControl];
     _tableView.rowHeight=UITableViewAutomaticDimension;
@@ -55,23 +69,35 @@
 }
 
 // Get data from server
-- (void)getData {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        NSError *error;
-        NSString *string = [NSString stringWithContentsOfURL: [NSURL URLWithString: @"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"] encoding:NSISOLatin1StringEncoding error:&error];
-        if(string != nil){
-            NSData * responseData = [string dataUsingEncoding:NSUTF8StringEncoding];
-            jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+- (void)getDataFromServer {
+    [self startLoader];
+    [NetworkUtility apiCallWithCompletion:^(NSDictionary *result, NSError *error) {
+        if (error == nil) {
+            jsonObject = result;
             dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self stopLoader];
+                
                 [self.refreshControl endRefreshing];
                 array = [jsonObject objectForKey:@"rows"];
                 self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
                 [_tableView reloadData];
             });
-        }else{
-            NSLog(@"%@", error.description);
+        }else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self stopLoader];
+                
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
+                                                                               message:@"Some error occurred!"
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * action) {}];
+                
+                [alert addAction:action];
+                [self presentViewController:alert animated:YES completion:nil];
+            });
         }
-    });
+    }];
     
     
 }
@@ -96,8 +122,8 @@
     
     cell.imgView.image = [UIImage imageNamed:@"placeholder.png"];
     if(![[dict objectForKey:@"imageHref"] isKindOfClass:[NSNull class]])
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"imageHref"]]
-                    placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"imageHref"]]
+                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
     cell.titleLabel.text = @"";
     if(![[dict objectForKey:@"title"] isKindOfClass:[NSNull class]]){
