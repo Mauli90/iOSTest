@@ -10,13 +10,14 @@
 #import "CustomTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NetworkUtility.h"
+
 @interface ViewController ()
+
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
 @implementation ViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     array = [[NSArray alloc] init];
@@ -24,7 +25,7 @@
     [self plotUI];
     
     // Activity Indicator
-    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake (UIScreen.mainScreen.bounds.size.width/2 - 40, UIScreen.mainScreen.bounds.size.height/2 - 40, 80, 80)];
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake ([[UIScreen mainScreen] bounds].size.width/2 - 40, [[UIScreen mainScreen] bounds].size.height/2 - 40, 80, 80)];
     self.activityIndicatorView.color = [UIColor blackColor];
     [self.view addSubview:self.activityIndicatorView];
     
@@ -40,12 +41,9 @@
 }
 // Programatically UI plot
 - (void)plotUI{
-    int width = [[UIScreen mainScreen] bounds].size.width;
-    int height = [[UIScreen mainScreen] bounds].size.height;
-    
     // Table view implimentation
     _tableView = [[UITableView alloc]init];
-    _tableView.frame = CGRectMake(0,0,width,height);
+    _tableView.frame = CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height);
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
