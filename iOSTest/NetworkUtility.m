@@ -18,13 +18,17 @@
         if(string != nil){
             NSData * responseData = [string dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary * jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-            completion(jsonObject, error);
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                completion(jsonObject, error);
+            });
             
         }else{
-            completion(nil, error);
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                completion(nil, error);
+            });
         }
     });
-
+    
 }
 
 @end

@@ -72,30 +72,25 @@
 - (void)getDataFromServer {
     [self startLoader];
     [NetworkUtility apiCallWithCompletion:^(NSDictionary *result, NSError *error) {
+        [self stopLoader];
         if (error == nil) {
             jsonObject = result;
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self stopLoader];
-                
-                [self.refreshControl endRefreshing];
-                array = [jsonObject objectForKey:@"rows"];
-                self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
-                [_tableView reloadData];
-            });
-        }else
+            [self.refreshControl endRefreshing];
+            array = [jsonObject objectForKey:@"rows"];
+            self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
+            [_tableView reloadData];
+            
+        }
+        else
         {
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self stopLoader];
-                
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
-                                                                               message:@"Some error occurred!"
-                                                                        preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                               handler:^(UIAlertAction * action) {}];
-                
-                [alert addAction:action];
-                [self presentViewController:alert animated:YES completion:nil];
-            });
+            [self stopLoader];
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
+                                                                           message:@"Some error occurred!"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action) {}];
+            [alert addAction:action];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }];
     
