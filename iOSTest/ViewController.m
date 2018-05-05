@@ -12,6 +12,7 @@
 #import "NetworkUtility.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
@@ -42,15 +43,15 @@
 // Programatically UI plot
 - (void)plotUI{
     // Table view implimentation
-    _tableView = [[UITableView alloc]init];
-    _tableView.frame = CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height);
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
+//    _tableView = [[UITableView alloc]init];
+//    _tableView.frame = CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height);
+//    _tableView.dataSource = self;
+//    _tableView.delegate = self;
     [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
     [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [_tableView reloadData];
-    [self.view addSubview:_tableView];
+   // [self.view addSubview:_tableView];
     
     
     // Pull to refresh

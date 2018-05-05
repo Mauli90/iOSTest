@@ -10,7 +10,6 @@
 
 @interface ViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    UITableView * _tableView;
     NSArray * array;
     NSDictionary * jsonObject;
 }

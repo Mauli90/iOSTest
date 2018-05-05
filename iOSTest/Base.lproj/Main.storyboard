@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="testTableView" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -20,9 +20,28 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rT1-zA-mnt">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Gg1-3g-4r2"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Ei0-Ke-HWN"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="rT1-zA-mnt" secondAttribute="trailing" id="Ple-dH-yOw"/>
+                            <constraint firstItem="rT1-zA-mnt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="kA1-Sf-Fp3"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rT1-zA-mnt" secondAttribute="bottom" id="qzg-8L-ETA"/>
+                            <constraint firstItem="rT1-zA-mnt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sUL-ud-sIA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gCY-zo-lMU"/>
+                    <connections>
+                        <outlet property="tableView" destination="rT1-zA-mnt" id="KDL-N6-lHP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
