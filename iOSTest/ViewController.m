@@ -12,24 +12,35 @@
 #import "NetworkUtility.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+{
+    UITableView *tableView;
+}
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
 @implementation ViewController
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    array = [[NSArray alloc] init];
-    
-    [self plotUI];
+-(void)loadView{
+    self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    self.view.backgroundColor = [UIColor whiteColor];
+    tableView = [[UITableView alloc]init];
+    tableView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    [self.view addSubview:tableView];
+   
     
     // Activity Indicator
     self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake ([[UIScreen mainScreen] bounds].size.width/2 - 40, [[UIScreen mainScreen] bounds].size.height/2 - 40, 80, 80)];
     self.activityIndicatorView.color = [UIColor blackColor];
     [self.view addSubview:self.activityIndicatorView];
     
+    [self initTableViewCell];
+
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    array = [[NSArray alloc] init];
     [self getDataFromServer];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -40,14 +51,13 @@
 -(void)stopLoader{
     [self.activityIndicatorView stopAnimating];
 }
-// Programatically UI plot
-- (void)plotUI{
+- (void)initTableViewCell{
     // Table view implimentation
 
-    [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
-    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [_tableView reloadData];
+    [tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [tableView reloadData];
     
     
     // Pull to refresh
@@ -58,13 +68,14 @@
     [self.refreshControl addTarget:self
                             action:@selector(getDataFromServer)
                   forControlEvents:UIControlEventValueChanged];
-    [_tableView addSubview:_refreshControl];
-    _tableView.rowHeight=UITableViewAutomaticDimension;
+    [tableView addSubview:_refreshControl];
+    tableView.rowHeight=UITableViewAutomaticDimension;
     
 }
 
 // Get data from server
 - (void)getDataFromServer {
+    
     [self startLoader];
     [NetworkUtility apiCallWithCompletion:^(NSDictionary *result, NSError *error) {
         [self stopLoader];
@@ -73,7 +84,7 @@
             [self.refreshControl endRefreshing];
             array = [jsonObject objectForKey:@"rows"];
             self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
-            [_tableView reloadData];
+            [tableView reloadData];
             
         }
         else
