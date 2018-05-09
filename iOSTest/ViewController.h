@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Response.h"
 @interface ViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    NSArray * array;
-    NSDictionary * jsonObject;
+    Response * response;
 }
 @property (nonatomic, strong) UIRefreshControl *  refreshControl;
 

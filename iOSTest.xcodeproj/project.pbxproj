@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F41DC910209CD12E003393CC /* NetworkUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F41DC90F209CD12E003393CC /* NetworkUtility.m */; };
+		F43F95D620A3622300776B95 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = F43F95D520A3622300776B95 /* Response.m */; };
 		F441A0EC20977C6200DEB97D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F441A0EB20977C6200DEB97D /* main.m */; };
 		F441A0EF20977C6200DEB97D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F441A0EE20977C6200DEB97D /* AppDelegate.m */; };
 		F441A0F220977C6200DEB97D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F441A0F120977C6200DEB97D /* ViewController.m */; };
@@ -41,6 +42,8 @@
 		EAF4C7A732598A3796E90379 /* Pods-iOSTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSTest/Pods-iOSTest.release.xcconfig"; sourceTree = "<group>"; };
 		F41DC90E209CD12E003393CC /* NetworkUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkUtility.h; sourceTree = "<group>"; };
 		F41DC90F209CD12E003393CC /* NetworkUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkUtility.m; sourceTree = "<group>"; };
+		F43F95D420A3622300776B95 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		F43F95D520A3622300776B95 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
 		F441A0E720977C6200DEB97D /* iOSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F441A0EB20977C6200DEB97D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F441A0ED20977C6200DEB97D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 		F43F95D320A35B4700776B95 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F43F95D420A3622300776B95 /* Response.h */,
+				F43F95D520A3622300776B95 /* Response.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F43F95D620A3622300776B95 /* Response.m in Sources */,
 				F441A0F220977C6200DEB97D /* ViewController.m in Sources */,
 				F441A0EF20977C6200DEB97D /* AppDelegate.m in Sources */,
 				F41DC910209CD12E003393CC /* NetworkUtility.m in Sources */,

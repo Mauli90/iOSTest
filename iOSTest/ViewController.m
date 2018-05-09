@@ -10,7 +10,7 @@
 #import "CustomTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NetworkUtility.h"
-
+#import "Response.h"
 @interface ViewController ()
 {
     UITableView * _tableView;
@@ -40,7 +40,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    array = [[NSArray alloc] init];
     [self getDataFromServer];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -80,10 +79,9 @@
     [NetworkUtility apiCallWithCompletion:^(NSDictionary *result, NSError *error) {
         [self stopLoader];
         if (error == nil) {
-            jsonObject = result;
+            response = [[Response alloc] initWithJson:result];
             [self.refreshControl endRefreshing];
-            array = [jsonObject objectForKey:@"rows"];
-            self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
+            self.title = [NSString stringWithFormat:@"%@",response.title];
             [_tableView reloadData];
             
         }
@@ -106,7 +104,7 @@
 // Table view Delegate & Datasource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return array.count;
+    return response.rows.count;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -119,7 +117,7 @@
 {
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    NSDictionary * dict = [array objectAtIndex:indexPath.row];
+    NSDictionary * dict = [response.rows objectAtIndex:indexPath.row];
     
     cell.imgView.image = [UIImage imageNamed:@"placeholder.png"];
     if(![[dict objectForKey:@"imageHref"] isKindOfClass:[NSNull class]])
