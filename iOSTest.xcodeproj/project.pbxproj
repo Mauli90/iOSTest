@@ -107,6 +107,13 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		F43F95D320A35B4700776B95 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F441A0DE20977C6200DEB97D = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +138,7 @@
 		F441A0E920977C6200DEB97D /* iOSTest */ = {
 			isa = PBXGroup;
 			children = (
+				F43F95D320A35B4700776B95 /* Model */,
 				F41DC90D209CD058003393CC /* Utilities */,
 				F4787F92209796C100F60FB4 /* placeholder.png */,
 				F441A0ED20977C6200DEB97D /* AppDelegate.h */,

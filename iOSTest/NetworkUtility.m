@@ -12,49 +12,22 @@
 
 @implementation NetworkUtility
 + (void)apiCallWithCompletion:(void (^)(NSDictionary *result, NSError *error))completion{
-//    NSString *htmlBody = [NSString stringWithFormat:@""];
-//    
-//    NSMutableString *httpBodyString=[[NSMutableString alloc] initWithString:htmlBody];
-//    NSString* string = APIURL;
-//    NSURL *url = [NSURL URLWithString:[string localizedNameOfStringEncoding:NSISOLatin1StringEncoding]];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//    [request setHTTPBody:[httpBodyString dataUsingEncoding:NSISOLatin1StringEncoding]];
-//
-//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue]
-//                           completionHandler: ^(NSURLResponse * response, NSData * data, NSError * error) {
-//                               NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse*)response;
-//                               if(httpResponse.statusCode == 200) {
-//                                   
-//                                   NSDictionary * jsonObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                                   dispatch_async(dispatch_get_main_queue(), ^(void){
-//                                       completion(jsonObject, error);
-//                                   });
-//                               }else{
-//                                   dispatch_async(dispatch_get_main_queue(), ^(void){
-//                                       completion(nil, error);
-//                                   });
-//                               }
-//                           }
-//     ];
 
+    NSURL *url = [NSURL URLWithString:APIURL];
+    NSMutableURLRequest *requset = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        NSError *error;
-        NSString *string = [NSString stringWithContentsOfURL: [NSURL URLWithString: APIURL] encoding:NSISOLatin1StringEncoding error:&error];
-        if(string != nil){
-            NSData * responseData = [string dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary * jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-            dispatch_async(dispatch_get_main_queue(), ^(void){
+    [NSURLConnection sendAsynchronousRequest:requset queue: [NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+        
+        NSData *jsonData = [NSData dataWithData:data];
+        NSError *error = nil;
+        
+        NSString *str = [[NSString alloc] initWithData:jsonData encoding:NSISOLatin1StringEncoding];
+        NSData * responseData = [str dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary * jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^(void){
                 completion(jsonObject, error);
-            });
-            
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                completion(nil, error);
-            });
-        }
-    });
-    
+        });
+    }];
 }
 
 @end

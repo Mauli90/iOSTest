@@ -13,7 +13,7 @@
 
 @interface ViewController ()
 {
-    UITableView *tableView;
+    UITableView * _tableView;
 }
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
@@ -23,11 +23,11 @@
 -(void)loadView{
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     self.view.backgroundColor = [UIColor whiteColor];
-    tableView = [[UITableView alloc]init];
-    tableView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    [self.view addSubview:tableView];
+    _tableView = [[UITableView alloc]init];
+    _tableView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    [self.view addSubview:_tableView];
    
     
     // Activity Indicator
@@ -54,10 +54,10 @@
 - (void)initTableViewCell{
     // Table view implimentation
 
-    [tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
-    [tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [tableView reloadData];
+    [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [_tableView reloadData];
     
     
     // Pull to refresh
@@ -68,8 +68,8 @@
     [self.refreshControl addTarget:self
                             action:@selector(getDataFromServer)
                   forControlEvents:UIControlEventValueChanged];
-    [tableView addSubview:_refreshControl];
-    tableView.rowHeight=UITableViewAutomaticDimension;
+    [_tableView addSubview:_refreshControl];
+    _tableView.rowHeight=UITableViewAutomaticDimension;
     
 }
 
@@ -84,7 +84,7 @@
             [self.refreshControl endRefreshing];
             array = [jsonObject objectForKey:@"rows"];
             self.title = [NSString stringWithFormat:@"%@",[jsonObject objectForKey:@"title"]];
-            [tableView reloadData];
+            [_tableView reloadData];
             
         }
         else
