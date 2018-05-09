@@ -19,6 +19,7 @@
         self.rows = [[NSMutableArray alloc] init];
         NSArray * arr = [jsonObject valueForKey:@"rows"];
         for (NSDictionary * row in arr) {
+            if(![[row valueForKey:@"title"] isKindOfClass:[NSNull class]])
             [self.rows addObject:[[Row alloc] initWithDict:row]];
         }
     }

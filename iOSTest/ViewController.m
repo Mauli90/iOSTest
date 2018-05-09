@@ -20,6 +20,8 @@
 @end
 
 @implementation ViewController
+
+
 -(void)loadView{
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -27,8 +29,10 @@
     _tableView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
     _tableView.dataSource = self;
     _tableView.delegate = self;
+
     [self.view addSubview:_tableView];
-   
+    _tableView.rowHeight=UITableViewAutomaticDimension;
+
     
     // Activity Indicator
     self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake ([[UIScreen mainScreen] bounds].size.width/2 - 40, [[UIScreen mainScreen] bounds].size.height/2 - 40, 80, 80)];
@@ -36,7 +40,7 @@
     [self.view addSubview:self.activityIndicatorView];
     
     [self initTableViewCell];
-
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,12 +65,11 @@
                             action:@selector(getDataFromServer)
                   forControlEvents:UIControlEventValueChanged];
     [_tableView addSubview:_refreshControl];
-    _tableView.rowHeight=UITableViewAutomaticDimension;
-
+    
 }
 - (void)initTableViewCell{
     // Table view implimentation
-
+    
     [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
     [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -80,9 +83,10 @@
     [self startLoader];
     [NetworkUtility apiCallWithCompletion:^(NSDictionary *result, NSError *error) {
         [self stopLoader];
+        [self.refreshControl endRefreshing];
         if (error == nil) {
             response = [[Response alloc] initWithJson:result];
-            [self.refreshControl endRefreshing];
+            
             self.title = [NSString stringWithFormat:@"%@",response.title];
             [_tableView reloadData];
             
@@ -102,6 +106,8 @@
     
 }
 
+#pragma mark - UITableView Datasource Methods
+
 // Table view Delegate & Datasource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -120,11 +126,11 @@
     
     Row * dict = [response.rows objectAtIndex:indexPath.row];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:dict.imageHref]
-                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                    placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     [cell.titleLabel setText:[NSString stringWithFormat:@"%@", dict.title]];
     [cell.descLabel setText:[NSString stringWithFormat:@"%@", dict.desc]];
-    cell.descLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.descLabel.numberOfLines=0;
+     cell.descLabel.lineBreakMode = NSLineBreakByWordWrapping;
+     cell.descLabel.numberOfLines=0;
     [cell.descLabel sizeToFit];
     
     return cell;
