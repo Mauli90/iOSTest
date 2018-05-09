@@ -12,9 +12,9 @@
 #import "NetworkUtility.h"
 #import "Response.h"
 @interface ViewController ()
-{
-    UITableView * _tableView;
-}
+
+@property (nonatomic) UITableView * tableView;
+
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
@@ -23,6 +23,7 @@
 
 
 -(void)loadView{
+   
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     self.view.backgroundColor = [UIColor whiteColor];
     _tableView = [[UITableView alloc]init];
@@ -86,7 +87,6 @@
         [self.refreshControl endRefreshing];
         if (error == nil) {
             response = [[Response alloc] initWithJson:result];
-            
             self.title = [NSString stringWithFormat:@"%@",response.title];
             [_tableView reloadData];
             
@@ -124,14 +124,14 @@
 {
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    Row * dict = [response.rows objectAtIndex:indexPath.row];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:dict.imageHref]
+    Row * row = [response.rows objectAtIndex:indexPath.row];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:row.imageHref]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    [cell.titleLabel setText:[NSString stringWithFormat:@"%@", dict.title]];
-    [cell.descLabel setText:[NSString stringWithFormat:@"%@", dict.desc]];
-     cell.descLabel.lineBreakMode = NSLineBreakByWordWrapping;
-     cell.descLabel.numberOfLines=0;
-    [cell.descLabel sizeToFit];
+    [cell.titleLabel setText:[NSString stringWithFormat:@"%@", row.title]];
+    [cell.descriptionLabel setText:[NSString stringWithFormat:@"%@", row.desc]];
+     cell.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+     cell.descriptionLabel.numberOfLines=0;
+    [cell.descriptionLabel sizeToFit];
     
     return cell;
 }

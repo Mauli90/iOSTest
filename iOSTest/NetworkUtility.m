@@ -21,8 +21,8 @@
         NSData *jsonData = [NSData dataWithData:data];
         NSError *error = nil;
         
-        NSString *str = [[NSString alloc] initWithData:jsonData encoding:NSISOLatin1StringEncoding];
-        NSData * responseData = [str dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *stringJson = [[NSString alloc] initWithData:jsonData encoding:NSISOLatin1StringEncoding];
+        NSData * responseData = [stringJson dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary * jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
         dispatch_async(dispatch_get_main_queue(), ^(void){
                 completion(jsonObject, error);

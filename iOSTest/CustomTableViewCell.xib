@@ -52,7 +52,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="descLabel" destination="Hmh-7u-3rH" id="el9-Rl-6I9"/>
+                <outlet property="descriptionLabel" destination="Hmh-7u-3rH" id="VwX-cZ-zuX"/>
                 <outlet property="imgView" destination="ypL-Bb-D3s" id="XYN-hm-EC5"/>
                 <outlet property="titleLabel" destination="0lt-eN-S7r" id="DRE-aX-GvT"/>
             </connections>
