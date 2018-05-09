@@ -40,6 +40,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initPullToRefresh];
     [self getDataFromServer];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -50,16 +51,8 @@
 -(void)stopLoader{
     [self.activityIndicatorView stopAnimating];
 }
-- (void)initTableViewCell{
-    // Table view implimentation
 
-    [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
-    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [_tableView reloadData];
-    
-    
-    // Pull to refresh
+-(void)initPullToRefresh{
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor purpleColor];
@@ -69,6 +62,15 @@
                   forControlEvents:UIControlEventValueChanged];
     [_tableView addSubview:_refreshControl];
     _tableView.rowHeight=UITableViewAutomaticDimension;
+
+}
+- (void)initTableViewCell{
+    // Table view implimentation
+
+    [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [_tableView reloadData];
     
 }
 
@@ -87,7 +89,6 @@
         }
         else
         {
-            [self stopLoader];
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
                                                                            message:@"Some error occurred!"
                                                                     preferredStyle:UIAlertControllerStyleAlert];
@@ -117,24 +118,11 @@
 {
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    NSDictionary * dict = [response.rows objectAtIndex:indexPath.row];
-    
-    cell.imgView.image = [UIImage imageNamed:@"placeholder.png"];
-    if(![[dict objectForKey:@"imageHref"] isKindOfClass:[NSNull class]])
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"imageHref"]]
+    Row * dict = [response.rows objectAtIndex:indexPath.row];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:dict.imageHref]
                         placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    
-    cell.titleLabel.text = @"";
-    if(![[dict objectForKey:@"title"] isKindOfClass:[NSNull class]]){
-        [cell.titleLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]]];
-    }
-    
-    cell.descLabel.text = @"";
-    if(![[dict objectForKey:@"description"] isKindOfClass:[NSNull class]]){
-        [cell.descLabel setText:[NSString stringWithFormat:@"%@", [dict objectForKey:@"description"]]];
-    }
-    
-    
+    [cell.titleLabel setText:[NSString stringWithFormat:@"%@", dict.title]];
+    [cell.descLabel setText:[NSString stringWithFormat:@"%@", dict.desc]];
     cell.descLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.descLabel.numberOfLines=0;
     [cell.descLabel sizeToFit];

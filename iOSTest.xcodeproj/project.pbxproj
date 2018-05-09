@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F41DC910209CD12E003393CC /* NetworkUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F41DC90F209CD12E003393CC /* NetworkUtility.m */; };
 		F43F95D620A3622300776B95 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = F43F95D520A3622300776B95 /* Response.m */; };
+		F43F95D920A3661900776B95 /* Row.m in Sources */ = {isa = PBXBuildFile; fileRef = F43F95D820A3661900776B95 /* Row.m */; };
 		F441A0EC20977C6200DEB97D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F441A0EB20977C6200DEB97D /* main.m */; };
 		F441A0EF20977C6200DEB97D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F441A0EE20977C6200DEB97D /* AppDelegate.m */; };
 		F441A0F220977C6200DEB97D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F441A0F120977C6200DEB97D /* ViewController.m */; };
@@ -44,6 +45,8 @@
 		F41DC90F209CD12E003393CC /* NetworkUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkUtility.m; sourceTree = "<group>"; };
 		F43F95D420A3622300776B95 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
 		F43F95D520A3622300776B95 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		F43F95D720A3661900776B95 /* Row.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Row.h; sourceTree = "<group>"; };
+		F43F95D820A3661900776B95 /* Row.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Row.m; sourceTree = "<group>"; };
 		F441A0E720977C6200DEB97D /* iOSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F441A0EB20977C6200DEB97D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F441A0ED20977C6200DEB97D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 			children = (
 				F43F95D420A3622300776B95 /* Response.h */,
 				F43F95D520A3622300776B95 /* Response.m */,
+				F43F95D720A3661900776B95 /* Row.h */,
+				F43F95D820A3661900776B95 /* Row.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			files = (
 				F43F95D620A3622300776B95 /* Response.m in Sources */,
 				F441A0F220977C6200DEB97D /* ViewController.m in Sources */,
+				F43F95D920A3661900776B95 /* Row.m in Sources */,
 				F441A0EF20977C6200DEB97D /* AppDelegate.m in Sources */,
 				F41DC910209CD12E003393CC /* NetworkUtility.m in Sources */,
 				F441A10320977F1B00DEB97D /* CustomTableViewCell.m in Sources */,

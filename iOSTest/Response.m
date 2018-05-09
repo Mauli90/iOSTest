@@ -16,7 +16,11 @@
     
     if (self) {
         self.title = [jsonObject valueForKey:@"title"];
-        self.rows = [jsonObject valueForKey:@"rows"];;
+        self.rows = [[NSMutableArray alloc] init];
+        NSArray * arr = [jsonObject valueForKey:@"rows"];
+        for (NSDictionary * row in arr) {
+            [self.rows addObject:[[Row alloc] initWithDict:row]];
+        }
     }
     return self;
 }
