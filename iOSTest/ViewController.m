@@ -13,7 +13,7 @@
 #import "Response.h"
 @interface ViewController ()
 
-@property (nonatomic) UITableView * tableView;
+@property (nonatomic, strong) UITableView * tableView;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
@@ -26,13 +26,13 @@
    
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     self.view.backgroundColor = [UIColor whiteColor];
-    _tableView = [[UITableView alloc]init];
-    _tableView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
+    self.tableView = [[UITableView alloc]init];
+    self.tableView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 
-    [self.view addSubview:_tableView];
-    _tableView.rowHeight=UITableViewAutomaticDimension;
+    [self.view addSubview:self.tableView];
+    self.tableView.rowHeight=UITableViewAutomaticDimension;
 
     
     // Activity Indicator
@@ -65,16 +65,16 @@
     [self.refreshControl addTarget:self
                             action:@selector(getDataFromServer)
                   forControlEvents:UIControlEventValueChanged];
-    [_tableView addSubview:_refreshControl];
+    [self.tableView addSubview:_refreshControl];
     
 }
 - (void)initTableViewCell{
     // Table view implimentation
     
-    [_tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
-    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [_tableView reloadData];
+    [self.tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.tableView reloadData];
     
 }
 
@@ -82,33 +82,26 @@
 - (void)getDataFromServer {
     
     [self startLoader];
+   
     [NetworkUtility apiCallWithCompletion:^(NSDictionary *result, NSError *error) {
         [self stopLoader];
         [self.refreshControl endRefreshing];
-        if (error == nil) {
+        if (!error) {
             response = [[Response alloc] initWithJson:result];
             self.title = [NSString stringWithFormat:@"%@",response.title];
-            [_tableView reloadData];
-            
+            [self.tableView reloadData];
         }
         else
         {
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
-                                                                           message:@"Some error occurred!"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * action) {}];
-            [alert addAction:action];
-            [self presentViewController:alert animated:YES completion:nil];
+            [self showPopupWithMessage:@"Some error occurred!"];
         }
     }];
     
     
 }
 
-#pragma mark - UITableView Datasource Methods
+#pragma mark - UITableView Delegate & Datasource Methods
 
-// Table view Delegate & Datasource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return response.rows.count;
@@ -125,15 +118,32 @@
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     Row * row = [response.rows objectAtIndex:indexPath.row];
+    
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:row.imageHref]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
     [cell.titleLabel setText:[NSString stringWithFormat:@"%@", row.title]];
+    
     [cell.descriptionLabel setText:[NSString stringWithFormat:@"%@", row.desc]];
-     cell.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
-     cell.descriptionLabel.numberOfLines=0;
+    
+    cell.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    cell.descriptionLabel.numberOfLines=0;
+    
     [cell.descriptionLabel sizeToFit];
     
     return cell;
+}
+
+-(void)showPopupWithMessage:(NSString*)message
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {}];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

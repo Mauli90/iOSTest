@@ -9,7 +9,7 @@
 
 #import <XCTest/XCTest.h>
 #import "ViewController_Private.h"
-
+#import "CustomTableViewCell.h"
 @interface iOSTestTests : XCTestCase
 
 @property (nonatomic, strong) ViewController *vc;
@@ -72,8 +72,26 @@
     XCTAssertNotNil(self.vc.tableView.delegate, @"Table delegate cannot be nil");
 }
 
+- (void)testTableViewCellCreateCellsWithReuseIdentifier
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UITableViewCell *cell = [self.vc tableView:self.vc.tableView cellForRowAtIndexPath:indexPath];
+    NSString *expectedReuseIdentifier = @"Cell";
+    XCTAssertTrue([cell.reuseIdentifier isEqualToString:expectedReuseIdentifier], @"Table does not create reusable cells");
+}
 
+- (void)testTableViewHeightForRowAtIndexPath
+{
+    CGFloat expectedHeight = 100.0;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    CGFloat actualHeight = [self.vc tableView:self.vc.tableView estimatedHeightForRowAtIndexPath:indexPath];
+    XCTAssertEqual(expectedHeight, actualHeight);
+}
 
-
-
+//- (void)testTableViewNumberOfRowsInSection
+//{
+//    NSInteger expectedRows = 13;
+//    NSInteger actualRows = [self.vc tableView:self.vc.tableView numberOfRowsInSection:0];
+//    XCTAssertEqual(actualRows,expectedRows);
+//}
 @end
