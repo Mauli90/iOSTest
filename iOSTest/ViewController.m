@@ -13,17 +13,12 @@
 #import "Response.h"
 @interface ViewController ()
 
-@property (nonatomic, strong) UITableView * tableView;
-
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
-
 @end
 
 @implementation ViewController
 
-
--(void)loadView{
-   
+-(void)loadView {
+    
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView = [[UITableView alloc]init];
@@ -33,14 +28,13 @@
 
     [self.view addSubview:self.tableView];
     self.tableView.rowHeight=UITableViewAutomaticDimension;
-
+    
+    [self initTableViewCell];
     
     // Activity Indicator
     self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake ([[UIScreen mainScreen] bounds].size.width/2 - 40, [[UIScreen mainScreen] bounds].size.height/2 - 40, 80, 80)];
     self.activityIndicatorView.color = [UIColor blackColor];
     [self.view addSubview:self.activityIndicatorView];
-    
-    [self initTableViewCell];
     
 }
 - (void)viewDidLoad {
@@ -50,14 +44,14 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
--(void)startLoader{
+-(void)startLoader {
     [self.activityIndicatorView startAnimating];
 }
--(void)stopLoader{
+-(void)stopLoader {
     [self.activityIndicatorView stopAnimating];
 }
 
--(void)initPullToRefresh{
+-(void)initPullToRefresh {
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor purpleColor];
@@ -68,14 +62,11 @@
     [self.tableView addSubview:_refreshControl];
     
 }
-- (void)initTableViewCell{
-    // Table view implimentation
+- (void)initTableViewCell {
     
     [self.tableView registerClass:[CustomTableViewCell class] forCellReuseIdentifier:@"Cell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.tableView reloadData];
-    
 }
 
 // Get data from server

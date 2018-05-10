@@ -11,7 +11,7 @@
 #define APIURL @"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
 
 @implementation NetworkUtility
-+ (void)apiCallWithCompletion:(void (^)(NSDictionary *result, NSError *error))completion{
++ (void)apiCallWithCompletion:(void (^)(NSDictionary *result, NSError *error))completion {
 
     NSURL *url = [NSURL URLWithString:APIURL];
     NSMutableURLRequest *requset = [[NSMutableURLRequest alloc] initWithURL:url];

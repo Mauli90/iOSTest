@@ -14,6 +14,8 @@
 }
 @property (nonatomic, strong) UIRefreshControl *  refreshControl;
 
+@property (nonatomic, strong) UITableView * tableView;
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @end
 
